@@ -1,0 +1,381 @@
+export const nerSensorNodes = [
+  {
+    id: "SN-SKM-01",
+    name: "Gangtok NH-10 Km 42 Slope Station",
+    state: "Sikkim",
+    district: "East Sikkim",
+    lat: 27.3389,
+    lng: 88.6065,
+    elevation: "1,650 m",
+    slopeAngle: 42,
+    rainfall24h: 142.5, // mm
+    rainfallIntensity: 18.2, // mm/hr
+    soilMoistureVWC: 88.4, // %
+    poreWaterPressure: 45.2, // kPa
+    inclinometerDisplacement: 14.8, // mm/day
+    fs: 0.94, // Factor of Safety < 1.0 (Critical)
+    riskScore: 89,
+    riskLevel: "CRITICAL",
+    lastUpdated: "2 mins ago",
+    status: "ACTIVE_ALARM",
+    connectedHighway: "NH-10 (Siliguri - Gangtok)",
+    nearestVillage: "Rongli / Martam"
+  },
+  {
+    id: "SN-MEG-01",
+    name: "Shillong-Cherrapunji Ridge Sensor",
+    state: "Meghalaya",
+    district: "East Khasi Hills",
+    lat: 25.5788,
+    lng: 91.8933,
+    elevation: "1,490 m",
+    slopeAngle: 36,
+    rainfall24h: 185.0,
+    rainfallIntensity: 22.4,
+    soilMoistureVWC: 92.1,
+    poreWaterPressure: 52.0,
+    inclinometerDisplacement: 19.5,
+    fs: 0.91,
+    riskScore: 94,
+    riskLevel: "CRITICAL",
+    lastUpdated: " Just now",
+    status: "ACTIVE_ALARM",
+    connectedHighway: "NH-206 (Shillong - Sohra)",
+    nearestVillage: "Mawsynram / Sohra"
+  },
+  {
+    id: "SN-ASM-01",
+    name: "Haflong Dima Hasao Railway Hill Station",
+    state: "Assam",
+    district: "Dima Hasao",
+    lat: 25.1667,
+    lng: 93.0167,
+    elevation: "680 m",
+    slopeAngle: 34,
+    rainfall24h: 96.0,
+    rainfallIntensity: 11.5,
+    soilMoistureVWC: 74.5,
+    poreWaterPressure: 28.1,
+    inclinometerDisplacement: 6.2,
+    fs: 1.28,
+    riskScore: 62,
+    riskLevel: "HIGH",
+    lastUpdated: "5 mins ago",
+    status: "WARNING",
+    connectedHighway: "NH-27 (Haflong Corridor)",
+    nearestVillage: "Jatinga / Haflong Town"
+  },
+  {
+    id: "SN-MIZ-01",
+    name: "Aizawl Laipuitlang Slope Station",
+    state: "Mizoram",
+    district: "Aizawl",
+    lat: 23.7271,
+    lng: 92.7176,
+    elevation: "1,132 m",
+    slopeAngle: 39,
+    rainfall24h: 112.0,
+    rainfallIntensity: 14.0,
+    soilMoistureVWC: 81.0,
+    poreWaterPressure: 36.5,
+    inclinometerDisplacement: 9.4,
+    fs: 1.08,
+    riskScore: 78,
+    riskLevel: "HIGH",
+    lastUpdated: "1 min ago",
+    status: "WARNING",
+    connectedHighway: "NH-54 (Aizawl - Lunglei)",
+    nearestVillage: "Laipuitlang Ward"
+  },
+  {
+    id: "SN-NAG-01",
+    name: "Kohima NH-29 Bypass Sensor",
+    state: "Nagaland",
+    district: "Kohima",
+    lat: 25.6751,
+    lng: 94.1086,
+    elevation: "1,444 m",
+    slopeAngle: 31,
+    rainfall24h: 48.0,
+    rainfallIntensity: 5.2,
+    soilMoistureVWC: 54.0,
+    poreWaterPressure: 15.0,
+    inclinometerDisplacement: 2.1,
+    fs: 1.54,
+    riskScore: 38,
+    riskLevel: "MEDIUM",
+    lastUpdated: "12 mins ago",
+    status: "NORMAL",
+    connectedHighway: "NH-29 (Dimapur - Kohima)",
+    nearestVillage: "Dzüvötsü Ward"
+  },
+  {
+    id: "SN-MAN-01",
+    name: "Jiribam-Imphal NH-37 Hill Station",
+    state: "Manipur",
+    district: "Noney / Tamenglong",
+    lat: 24.8170,
+    lng: 93.6400,
+    elevation: "820 m",
+    slopeAngle: 38,
+    rainfall24h: 130.0,
+    rainfallIntensity: 16.8,
+    soilMoistureVWC: 86.2,
+    poreWaterPressure: 41.0,
+    inclinometerDisplacement: 12.1,
+    fs: 0.98,
+    riskScore: 86,
+    riskLevel: "CRITICAL",
+    lastUpdated: "3 mins ago",
+    status: "ACTIVE_ALARM",
+    connectedHighway: "NH-37 (Imphal - Jiribam)",
+    nearestVillage: "Tupul / Noney"
+  },
+  {
+    id: "SN-ARN-01",
+    name: "Itanagar Banderdewa Slope Node",
+    state: "Arunachal Pradesh",
+    district: "Papum Pare",
+    lat: 27.0844,
+    lng: 93.6053,
+    elevation: "320 m",
+    slopeAngle: 28,
+    rainfall24h: 32.0,
+    rainfallIntensity: 3.5,
+    soilMoistureVWC: 42.0,
+    poreWaterPressure: 10.0,
+    inclinometerDisplacement: 0.8,
+    fs: 1.82,
+    riskScore: 22,
+    riskLevel: "LOW",
+    lastUpdated: "8 mins ago",
+    status: "NORMAL",
+    connectedHighway: "NH-415 (Itanagar Highway)",
+    nearestVillage: "Karsingsa"
+  }
+];
+
+export const nerHighways = [
+  {
+    id: "HW-NH10",
+    name: "NH-10 Siliguri - Gangtok Highway",
+    state: "Sikkim / WB",
+    lengthKm: 114,
+    criticalSegment: "Km 38 to Km 48 (Seti Jhora / Kalijhora / Melli)",
+    riskLevel: "CRITICAL",
+    status: "PARTIALLY_BLOCKED",
+    advisory: "High risk of debris flows & rockfall. Heavy vehicles suspended. Reroute via Lava-Reshi pass.",
+    lat: 27.1500,
+    lng: 88.4800
+  },
+  {
+    id: "HW-NH37",
+    name: "NH-37 Imphal - Jiribam Highway",
+    state: "Manipur",
+    lengthKm: 220,
+    criticalSegment: "Tupul - Noney Bridge Approach",
+    riskLevel: "CRITICAL",
+    status: "HIGH_RISK_ALERT",
+    advisory: "Active slope failure detected at Tupul area. Emergency NDRF team pre-stationed.",
+    lat: 24.8170,
+    lng: 93.6400
+  },
+  {
+    id: "HW-NH206",
+    name: "NH-206 Shillong - Sohra Road",
+    state: "Meghalaya",
+    lengthKm: 54,
+    criticalSegment: "Mylliem to Sohra Gorge Pass",
+    riskLevel: "HIGH",
+    status: "CAUTION",
+    advisory: "Dense fog & active mudslides reported near Elephant Falls junction.",
+    lat: 25.4200,
+    lng: 91.8200
+  },
+  {
+    id: "HW-NH27",
+    name: "NH-27 Guwahati - Haflong - Silchar Corridor",
+    state: "Assam",
+    lengthKm: 310,
+    criticalSegment: "Jatinga Slope Subsidence Zone",
+    riskLevel: "HIGH",
+    status: "CAUTION",
+    advisory: "Single-lane traffic movement due to soil embankment creep.",
+    lat: 25.1667,
+    lng: 93.0167
+  },
+  {
+    id: "HW-NH29",
+    name: "NH-29 Dimapur - Kohima Highway",
+    state: "Nagaland",
+    lengthKm: 74,
+    criticalSegment: "Phesama Landslide Zone",
+    riskLevel: "MEDIUM",
+    status: "OPEN",
+    advisory: "Normal traffic. Continuous IoT displacement monitoring active.",
+    lat: 25.6400,
+    lng: 94.1000
+  }
+];
+
+export const nerVillages = [
+  {
+    id: "VIL-01",
+    name: "Martam & Rongli Hamlets",
+    state: "Sikkim",
+    district: "East Sikkim",
+    population: 4200,
+    riskLevel: "CRITICAL",
+    threatReason: "High soil saturation (88.4%) & antecedent rainfall > 140mm in 24h",
+    evacuationStatus: "RECOMMENDED",
+    designatedShelter: "Gangtok Indoor Sports Complex",
+    lat: 27.2800,
+    lng: 88.5800
+  },
+  {
+    id: "VIL-02",
+    name: "Tupul Railway Settlement",
+    state: "Manipur",
+    district: "Noney",
+    population: 1850,
+    riskLevel: "CRITICAL",
+    threatReason: "Pore water pressure exceeds shear strength (Fs = 0.98)",
+    evacuationStatus: "MANDATORY_IN_PROGRESS",
+    designatedShelter: "Noney High School Relief Center",
+    lat: 24.8100,
+    lng: 93.6300
+  },
+  {
+    id: "VIL-03",
+    name: "Mawsynram Valley Village",
+    state: "Meghalaya",
+    district: "East Khasi Hills",
+    population: 2800,
+    riskLevel: "CRITICAL",
+    threatReason: "Extreme precipitation (185mm/24h) causing rapid erosion",
+    evacuationStatus: "RECOMMENDED",
+    designatedShelter: "Shillong Civil Defense Shelter",
+    lat: 25.3000,
+    lng: 91.5800
+  },
+  {
+    id: "VIL-04",
+    name: "Laipuitlang Hill Ward",
+    state: "Mizoram",
+    district: "Aizawl",
+    population: 3400,
+    riskLevel: "HIGH",
+    threatReason: "Unplanned slope cut at base + slope angle 39°",
+    evacuationStatus: "ADVISORY_ISSUED",
+    designatedShelter: "Aizawl Multipurpose Center",
+    lat: 23.7300,
+    lng: 92.7200
+  },
+  {
+    id: "VIL-05",
+    name: "Jatinga Valley Settlement",
+    state: "Assam",
+    district: "Dima Hasao",
+    population: 6500,
+    riskLevel: "HIGH",
+    threatReason: "Sandstone weathering and railway embankment instability",
+    evacuationStatus: "ADVISORY_ISSUED",
+    designatedShelter: "Haflong Community Hall",
+    lat: 25.1500,
+    lng: 93.0300
+  }
+];
+
+export const nerShelters = [
+  {
+    id: "SHL-01",
+    name: "Gangtok Indoor Sports Complex Shelter",
+    state: "Sikkim",
+    location: "Paljor Stadium Road, Gangtok",
+    capacity: 800,
+    occupied: 145,
+    medicalStaff: "4 Doctors, 8 Nurses",
+    suppliesStatus: "ADEQUATE",
+    contactPerson: "Disaster Cell Sikkim (+91-3592-202688)",
+    lat: 27.3300,
+    lng: 88.6100
+  },
+  {
+    id: "SHL-02",
+    name: "Shillong Civil Defense Relief Center",
+    state: "Meghalaya",
+    location: "Laitumkhrah, Shillong",
+    capacity: 1200,
+    occupied: 380,
+    medicalStaff: "6 Doctors, 12 Nurses",
+    suppliesStatus: "ADEQUATE",
+    contactPerson: "SDMA Meghalaya (+91-364-2502094)",
+    lat: 25.5700,
+    lng: 91.8800
+  },
+  {
+    id: "SHL-03",
+    name: "Noney High School Relief Center",
+    state: "Manipur",
+    location: "Noney Market Ridge, Manipur",
+    capacity: 500,
+    occupied: 290,
+    medicalStaff: "2 Doctors, 4 Nurses",
+    suppliesStatus: "CRITICAL_REFILL_NEEDED",
+    contactPerson: "NDRF 12th Battalion Dispatch",
+    lat: 24.8200,
+    lng: 93.6500
+  },
+  {
+    id: "SHL-04",
+    name: "Haflong Community Relief Hall",
+    state: "Assam",
+    location: "Haflong Town Center, Dima Hasao",
+    capacity: 650,
+    occupied: 90,
+    medicalStaff: "3 Doctors, 5 Nurses",
+    suppliesStatus: "ADEQUATE",
+    contactPerson: "ASDMA Haflong (+91-3673-236324)",
+    lat: 25.1700,
+    lng: 93.0200
+  }
+];
+
+export const nerHistoricalRecords = [
+  {
+    id: "HIS-2023-SKM",
+    event: "2023 Teesta River & NH-10 Sikkim Landslides",
+    date: "October 2023",
+    location: "Chungthang & Seti Jhora, Sikkim",
+    casualties: 42,
+    impact: "Cut off Gangtok for 14 days, destroyed 32km highway pavement.",
+    cause: "GLOF + Heavy Antecedent Rainfall (210mm in 24h)"
+  },
+  {
+    id: "HIS-2022-MNP",
+    event: "2022 Noney Railway Construction Landslide",
+    date: "June 2022",
+    location: "Tupul Railway Yard, Manipur",
+    casualties: 61,
+    impact: "Massive debris flow buried railway camp & Ijei river stream.",
+    cause: "Unplanned slope cut + saturated shale formation (Fs dropped to 0.72)"
+  },
+  {
+    id: "HIS-2020-MEG",
+    event: "2020 Sohra-Jaintia Hills Landslide Surge",
+    date: "July 2020",
+    location: "East Khasi Hills & Jaintia Hills, Meghalaya",
+    casualties: 14,
+    impact: "Damaged 4 major bridges, isolated 28 remote hamlets.",
+    cause: "Torrential downpour (320mm / 48h)"
+  },
+  {
+    id: "HIS-2013-MIZ",
+    event: "2013 Aizawl Laipuitlang Collapse",
+    date: "May 2013",
+    location: "Laipuitlang Ward, Aizawl, Mizoram",
+    casualties: 17,
+    impact: "11 multi-story buildings collapsed down steep sandstone slope.",
+    cause: "Unplanned excavation on steep 44° slope during monsoon"
+  }
+];

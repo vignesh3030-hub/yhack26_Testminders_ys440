@@ -4,6 +4,7 @@ import { DisasterDataProvider, useDisasterData } from "./context/DisasterDataCon
 import { Sidebar } from "./components/Sidebar";
 import { HeaderBar } from "./components/HeaderBar";
 import { DashboardLayout } from "./components/DashboardLayout";
+import { FullMapsView } from "./components/FullMapsView";
 import { SensorTelemetry } from "./components/Dashboard/SensorTelemetry";
 import { AnalyticsCharts } from "./components/Dashboard/AnalyticsCharts";
 import { WhatIfSimulator } from "./components/AIModel/WhatIfSimulator";
@@ -29,8 +30,12 @@ function MainContent() {
 
         {/* Dynamic Page Views */}
         <main className="flex-1 p-4 md:p-6 space-y-6 max-w-[1600px] w-full mx-auto">
-          {(activeTab === "dashboard" || activeTab === "gisMap") && (
+          {activeTab === "dashboard" && (
             <DashboardLayout />
+          )}
+
+          {activeTab === "gisMap" && (
+            <FullMapsView />
           )}
 
           {activeTab === "aiPredictor" && (

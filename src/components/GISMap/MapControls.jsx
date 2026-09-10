@@ -36,7 +36,7 @@ export const MapControls = ({ layers, setLayers }) => {
         >
           <div className="flex items-center gap-2">
             <Flame className="w-3.5 h-3.5 text-red-400" />
-            <span>{t("gis.heatmapToggle")}</span>
+            <span>Risk Heatmap</span>
           </div>
           <span className={`w-2 h-2 rounded-full ${layers.heatmap ? 'bg-red-500' : 'bg-slate-600'}`} />
         </button>
@@ -52,7 +52,7 @@ export const MapControls = ({ layers, setLayers }) => {
         >
           <div className="flex items-center gap-2">
             <Activity className="w-3.5 h-3.5 text-blue-400" />
-            <span>{t("gis.sensorsToggle")}</span>
+            <span>IoT Sensors</span>
           </div>
           <span className={`w-2 h-2 rounded-full ${layers.sensors ? 'bg-blue-500' : 'bg-slate-600'}`} />
         </button>
@@ -68,7 +68,7 @@ export const MapControls = ({ layers, setLayers }) => {
         >
           <div className="flex items-center gap-2">
             <Navigation className="w-3.5 h-3.5 text-amber-400" />
-            <span>{t("gis.highwaysToggle")}</span>
+            <span>Vulnerable Highways</span>
           </div>
           <span className={`w-2 h-2 rounded-full ${layers.highways ? 'bg-amber-500' : 'bg-slate-600'}`} />
         </button>
@@ -84,7 +84,7 @@ export const MapControls = ({ layers, setLayers }) => {
         >
           <div className="flex items-center gap-2">
             <Home className="w-3.5 h-3.5 text-emerald-400" />
-            <span>{t("gis.villagesToggle")}</span>
+            <span>Mountain Villages</span>
           </div>
           <span className={`w-2 h-2 rounded-full ${layers.villages ? 'bg-emerald-500' : 'bg-slate-600'}`} />
         </button>
@@ -100,7 +100,7 @@ export const MapControls = ({ layers, setLayers }) => {
         >
           <div className="flex items-center gap-2">
             <Shield className="w-3.5 h-3.5 text-cyan-400" />
-            <span>{t("gis.sheltersToggle")}</span>
+            <span>Relief Shelters</span>
           </div>
           <span className={`w-2 h-2 rounded-full ${layers.shelters ? 'bg-cyan-500' : 'bg-slate-600'}`} />
         </button>
@@ -116,7 +116,7 @@ export const MapControls = ({ layers, setLayers }) => {
         >
           <div className="flex items-center gap-2">
             <FileText className="w-3.5 h-3.5 text-purple-400" />
-            <span>{t("gis.fieldReportsToggle")}</span>
+            <span>Field Reports</span>
           </div>
           <span className={`w-2 h-2 rounded-full ${layers.fieldReports ? 'bg-purple-500' : 'bg-slate-600'}`} />
         </button>

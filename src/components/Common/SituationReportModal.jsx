@@ -73,7 +73,7 @@ export const SituationReportModal = ({ onClose }) => {
               1. Executive Operational Summary
             </h3>
             <p className="text-slate-300 print:text-gray-800 leading-relaxed">
-              Monsoon cloudburst activity across North East India has triggered elevated slope pore water pressure along critical corridors. Active early warning alarms are triggered at <strong className="text-red-400 print:text-red-700">{criticalSensors.length} IoT Station locations</strong> (Gangtok NH-10, Shillong Sohra Ridge, Noney Manipur Axis). Physical Factor of Safety ($F_s$) has dropped below 1.0 at primary chokepoints.
+              Monsoon cloudburst activity across North East India and West Bengal has triggered elevated slope pore water pressure along critical mountain corridors. Official NDMI & ASDMA telemetry reports <strong className="text-red-400 print:text-red-700">active alarms at {criticalSensors.length} IoT Station locations</strong> (Gangtok NH-10, Sohra Ridge, Tupul Manipur Axis). Over <strong className="text-amber-400 print:text-amber-700">568,000 evacuees hosted across 1,007 relief centers</strong> with Factor of Safety ($F_s$) dropping below 1.0 at primary highway chokepoints.
             </p>
           </div>
 

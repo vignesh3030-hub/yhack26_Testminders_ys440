@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLanguage } from "../../context/LanguageContext";
 import { useDisasterData } from "../../context/DisasterDataContext";
+import { alertSound } from "../../utils/alertSound";
 import {
   X,
   Radio,
@@ -13,8 +14,7 @@ import {
 } from "lucide-react";
 
 export const BroadcastModal = ({ onClose }) => {
-  const { t, lang } = useLanguage();
-  const { sensors, villages } = useDisasterData();
+  const { t } = useLanguage();
 
   const [channelSMS, setChannelSMS] = useState(true);
   const [channelWhatsApp, setChannelWhatsApp] = useState(true);
@@ -30,11 +30,14 @@ export const BroadcastModal = ({ onClose }) => {
 
   const handleBroadcast = (e) => {
     e.preventDefault();
+    // Play synthesized audio siren alert
+    alertSound.playEmergencySiren(4.0);
+
     setSentSuccess(true);
     setTimeout(() => {
       setSentSuccess(false);
       onClose();
-    }, 2500);
+    }, 2800);
   };
 
   return (
@@ -70,10 +73,10 @@ export const BroadcastModal = ({ onClose }) => {
             <div className="p-6 bg-emerald-950/80 border border-emerald-700 rounded-xl text-center space-y-2 animate-fadeIn">
               <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto animate-bounce" />
               <h4 className="text-lg font-bold text-emerald-200">
-                Broadcast Sent Successfully!
+                Broadcast Sent & Siren Sound Triggered!
               </h4>
               <p className="text-slate-300">
-                Warning transmitted via SMS, WhatsApp & Local Siren Towers to {selectedTarget}.
+                Warning transmitted via SMS, WhatsApp & Siren Towers to {selectedTarget}.
               </p>
             </div>
           ) : (
@@ -130,8 +133,8 @@ export const BroadcastModal = ({ onClose }) => {
                       channelSiren ? "bg-amber-950/70 border-amber-700 text-amber-300" : "bg-slate-950 border-slate-800 text-slate-500"
                     }`}
                   >
-                    <Volume2 className="w-4 h-4 text-amber-400" />
-                    <span>Local Siren Tower</span>
+                    <Volume2 className="w-4 h-4 text-amber-400 animate-pulse" />
+                    <span>Local Siren Sound</span>
                   </button>
 
                   <button
@@ -174,7 +177,7 @@ export const BroadcastModal = ({ onClose }) => {
                   className="flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-bold rounded-xl shadow-lg transition"
                 >
                   <Send className="w-4 h-4" />
-                  <span>Transmit Alert Now</span>
+                  <span>Transmit Alert & Sound Siren</span>
                 </button>
               </div>
             </>

@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLanguage, languageNames } from "../context/LanguageContext";
 import { useDisasterData } from "../context/DisasterDataContext";
+import { alertSound } from "../utils/alertSound";
 import {
   MapPin,
   Calendar,
-  CloudSun,
   CloudRain,
   Globe,
-  UserCheck,
-  Maximize2,
-  Bell
+  Volume2,
+  VolumeX,
+  Bell,
+  Triangle
 } from "lucide-react";
 
 export const HeaderBar = () => {
   const { lang, setLang, t } = useLanguage();
   const { sensors } = useDisasterData();
+  const [isAudioMuted, setIsAudioMuted] = useState(false);
 
   const criticalCount = sensors.filter((s) => s.riskLevel === "CRITICAL").length;
   const highCount = sensors.filter((s) => s.riskLevel === "HIGH").length;
@@ -24,6 +26,15 @@ export const HeaderBar = () => {
     month: "long",
     year: "numeric"
   });
+
+  const handleToggleSound = () => {
+    const muted = alertSound.toggleMute();
+    setIsAudioMuted(muted);
+  };
+
+  const handleTestSiren = () => {
+    alertSound.playEmergencySiren(2.5);
+  };
 
   return (
     <header className="bg-slate-900/90 border-b border-slate-800/80 px-5 py-3 text-slate-100 flex flex-col md:flex-row items-center justify-between gap-4 sticky top-0 z-30 backdrop-blur-md shadow-lg">
@@ -45,17 +56,20 @@ export const HeaderBar = () => {
           <span className="text-[11px] text-slate-400 block font-medium">
             {t("header.statusLabel")}:
           </span>
-          <div className="mt-0.5">
+          <div className="mt-0.5 flex items-center gap-2">
             {criticalCount > 0 ? (
-              <span className="bg-red-950 border border-red-800 text-red-300 px-3 py-1 rounded-full font-bold text-xs shadow-inner animate-pulse">
+              <span className="bg-red-950 border border-red-800 text-red-300 px-3 py-1 rounded-full font-bold text-xs shadow-inner animate-pulse flex items-center gap-1">
+                <Triangle className="w-3 h-3 fill-red-400" />
                 Level IV (Critical)
               </span>
             ) : highCount > 0 ? (
-              <span className="bg-amber-950 border border-amber-800 text-amber-300 px-3 py-1 rounded-full font-bold text-xs shadow-inner">
+              <span className="bg-amber-950 border border-amber-800 text-amber-300 px-3 py-1 rounded-full font-bold text-xs shadow-inner flex items-center gap-1">
+                <Triangle className="w-3 h-3 fill-amber-400" />
                 Level III (Siaga)
               </span>
             ) : (
-              <span className="bg-emerald-950 border border-emerald-800 text-emerald-300 px-3 py-1 rounded-full font-bold text-xs shadow-inner">
+              <span className="bg-emerald-950 border border-emerald-800 text-emerald-300 px-3 py-1 rounded-full font-bold text-xs shadow-inner flex items-center gap-1">
+                <Triangle className="w-3 h-3 fill-emerald-400" />
                 Level I (Normal)
               </span>
             )}
@@ -85,6 +99,29 @@ export const HeaderBar = () => {
 
       {/* Right User & Control Cluster */}
       <div className="flex items-center gap-3 w-full md:w-auto justify-end">
+        {/* Test Siren Button */}
+        <button
+          onClick={handleTestSiren}
+          title="Play Test Emergency Siren Sound"
+          className="flex items-center gap-1 bg-red-950 hover:bg-red-900 border border-red-800 text-red-300 font-bold text-xs px-2.5 py-1.5 rounded-xl transition shadow"
+        >
+          <Bell className="w-3.5 h-3.5 text-red-400 animate-bounce" />
+          <span className="hidden sm:inline">Test Siren</span>
+        </button>
+
+        {/* Audio Mute/Unmute Toggle */}
+        <button
+          onClick={handleToggleSound}
+          title={isAudioMuted ? "Unmute Alert Audio" : "Mute Alert Audio"}
+          className={`p-2 rounded-xl border transition ${
+            isAudioMuted
+              ? "bg-slate-950 border-slate-800 text-slate-500"
+              : "bg-amber-950 border-amber-800 text-amber-300 shadow-md shadow-amber-950/50"
+          }`}
+        >
+          {isAudioMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 animate-pulse" />}
+        </button>
+
         {/* Language Selector Dropdown */}
         <div className="flex items-center gap-1.5 bg-slate-950 border border-slate-800 px-2.5 py-1.5 rounded-xl text-xs">
           <Globe className="w-3.5 h-3.5 text-amber-400" />

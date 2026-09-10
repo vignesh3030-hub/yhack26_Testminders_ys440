@@ -21,8 +21,8 @@ export const SituationReportModal = ({ onClose }) => {
   const criticalSensors = sensors.filter((s) => s.riskLevel === "CRITICAL");
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
-      <div className="bg-slate-900 border border-slate-700 w-full max-w-3xl rounded-2xl shadow-2xl overflow-hidden text-slate-100 flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md animate-fadeIn">
+      <div className="bg-slate-900 border border-slate-700 w-full max-w-3xl rounded-2xl shadow-2xl overflow-hidden text-slate-100 flex flex-col max-h-[90vh] relative z-[10000]">
         {/* Modal Action Header */}
         <div className="p-4 bg-slate-800 border-b border-slate-700 flex items-center justify-between no-print">
           <div className="flex items-center gap-2">

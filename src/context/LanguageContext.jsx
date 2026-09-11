@@ -5,6 +5,7 @@ const LanguageContext = createContext();
 
 export const languageNames = {
   en: "English",
+  ta: "தமிழ் (Tamil)",
   hi: "हिन्दी (Hindi)",
   as: "অসমীয়া (Assamese)",
   bn: "বাংলা (Bengali)",

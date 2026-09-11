@@ -138,6 +138,145 @@ export const translations = {
       shelterCapacity: "Available Capacity"
     }
   },
+  ta: {
+    appTitle: "AIMS - நிலச்சரிவு முன்னெச்சரிக்கை அமைப்பு",
+    subTitle: "தமிழ்நாடு மற்றும் வடகிழக்கு பேரிடர் கண்காணிப்பு மையம்",
+    nav: {
+      dashboard: "டாஷ்போர்டு",
+      gisMap: "வரைபடம் (Full Maps)",
+      analytics: "டெலிமெட்ரி தரவு",
+      aiPredictor: "AI ஆபத்து சிமுலேட்டர்",
+      earlyWarnings: "முன்னெச்சரிக்கை மையம்",
+      fieldReports: "கள அறிக்கைகள்",
+      emergencyResponse: "அவசரக்கால மீட்பு",
+      shelterTracker: "நிவாரண முகாம்கள்",
+      situationReport: "SitRep அறிக்கை ஏற்றுமதி",
+      historicalCases: "வரலாற்று நிகழ்வுகள்"
+    },
+    header: {
+      yourLocation: "உங்கள் இருப்பிடம்",
+      currentLocation: "நீலகிரி / குன்னூர் - வால்பாறை மண்டலம்",
+      statusLabel: "நிலைமை",
+      safe: "சாதாரண நிலை",
+      dateLabel: "தேதி",
+      weatherLabel: "24 மணி மழைப்பொழிவு",
+      adminTitle: "பேரிடர் கட்டுப்பாட்டு மையம்"
+    },
+    riskTiers: {
+      level4: "நிலை IV (மிகவும் ஆபத்தானது)",
+      level3: "நிலை III (உயர் ஆபத்து)",
+      level2: "நிலை II (கண்காணிப்பு)",
+      level1: "நிலை I (சாதாரண நிலை)"
+    },
+    gis: {
+      mapTitle: "முழு வரைபடம்",
+      mapsByProvince: "மண்டல வரைபடங்கள்",
+      exportMap: "ஏற்றுமதி",
+      legend: "ஆபத்து குறியீடு",
+      factorOfSafety: "பாதுகாப்பு காரணி (Fs)",
+      soilMoisture: "மண் ஈரப்பதம் (VWC)",
+      rainfall24h: "24 மணி மழை",
+      slopeAngle: "சாய்வு கோணம்"
+    },
+    gisControls: {
+      layersTitle: "GIS வரைபட அடுக்குகள்",
+      heatmap: "ஆபத்து வெப்ப வரைபடம்",
+      sensors: "IoT சென்சார்கள்",
+      highways: "ஆபத்தான நெடுஞ்சாலைகள்",
+      villages: "மலை கிராமங்கள்",
+      shelters: "நிவாரண முகாம்கள்",
+      fieldReports: "கள அறிக்கைகள்",
+      allIndia: "அனைத்து இந்திய பார்வை",
+      tnSector: "தமிழ்நாடு மண்டலம்",
+      nerSector: "வடகிழக்கு மண்டலம்"
+    },
+    mapPopups: {
+      location: "இருப்பிடம்",
+      rain24h: "24 மணி மழை",
+      soilSat: "மண் ஈரப்பதம் (VWC)",
+      slopeAngle: "சாய்வு கோணம்",
+      fsFactor: "பாதுகாப்பு காரணி (Fs)",
+      porePressure: "துளை நீர் அழுத்தம்",
+      displacement: "சென்சார் நகர்வு",
+      connectedHighway: "இணைக்கப்பட்ட நெடுஞ்சாலை",
+      population: "பாதிக்கப்படக்கூடிய மக்கள் தொகை",
+      evacuationStatus: "வெளியேற்ற நிலை",
+      designatedShelter: "ஒதுக்கப்பட்ட நிவாரண முகாம்",
+      primaryThreat: "முக்கிய பேரிடர் ஆபத்து",
+      dispatchRescue: "மீட்புக் குழுவை அனுப்பு",
+      highwayLength: "நெடுஞ்சாலை நீளம்",
+      criticalCorridor: "ஆபத்தான பாதை",
+      trafficStatus: "போக்குவரத்து நிலை",
+      travelAdvisory: "பயண வழிகாட்டுதல்",
+      reportedBy: "அறிக்கை அளித்தவர்",
+      hazardCategory: "ஆபத்து வகை",
+      viewTelemetry: "சென்சார் தரவை காண்",
+      close: "மூடு"
+    },
+    tables: {
+      recentReports: "சமீபத்திய நிலச்சரிவு மற்றும் சாய்வு அறிக்கைகள்",
+      sortBy: "வரிசைப்படுத்து",
+      latestReport: "சமீபத்திய அறிக்கை",
+      viewDetail: "விவரங்களை காண்",
+      name: "சாய்வு / இருப்பிடம்",
+      status: "ஆபத்து நிலை",
+      province: "மாநிலம் / மாவட்டம்",
+      keterangan: "விளக்கம் / அவதானிப்பு",
+      kelurahan: "வார்டு பகுதி",
+      temp: "மழைப்பொழிவு",
+      humidity: "மண் ஈரப்பதம்",
+      wind: "நகர்வு",
+      code: "குறியீடு",
+      cuaca: "வானிலை"
+    },
+    modal: {
+      detailReport: "அறிக்கை விவரங்கள்",
+      observation: "புவிநுட்பவியல் அவதானிப்பு",
+      visualObs: "நேரடி காட்சி அவதானிப்பு",
+      recommendations: "பாதுகாப்பு பரிந்துரைகள்",
+      close: "மூடு"
+    },
+    simulator: {
+      title: "ஊடாடும் நிலச்சரிவு 'What-If' சிமுலேட்டர்",
+      subtitle: "மழை மற்றும் மண் ஈரப்பதத்தை மாற்றி நேரடி AI கணிப்புகளைப் பாருங்கள்",
+      rainfallSlider: "24 மணி நேர மழைப்பொழிவு (மிமீ)",
+      soilMoistureSlider: "மண் ஈரப்பதம் (%)",
+      slopeCutSlider: "சாய்வு வெட்டு கோணம் (°)",
+      deforestationSlider: "மரங்கள் அழிப்பு (%)",
+      runSim: "சிமுலேஷனை இயக்கு",
+      fsResult: "பாதுகாப்பு காரணி (Fs)",
+      riskProbability: "நிலச்சரிவு சாத்தியக்கூறு",
+      aiRecommendation: "AI பரிந்துரை"
+    },
+    alerts: {
+      title: "முன்னெச்சரிக்கைகள் & அவசர எச்சரிக்கைகள்",
+      broadcastBtn: "அவசர எச்சரிக்கை அனுப்பு",
+      roadClosure: "நெடுஞ்சாலை மூடல் எச்சரிக்கை",
+      evacuationNotice: "உடனடி கிராம வெளியேற்ற அறிவிப்பு",
+      channels: "ஒளிபரப்பு: SMS, WhatsApp, சைரன் & ரேடியோ"
+    },
+    reports: {
+      title: "கள ஆபத்து சமர்ப்பிப்புகள்",
+      submitNew: "புதிய அறிக்கை சமர்ப்பி",
+      hazardType: "ஆபத்து வகை",
+      tensionCrack: "மண் பிளவு / விரிசல்",
+      rockfall: "பாறை சரிவு",
+      mudslide: "சேறு சரிவு",
+      roadSubsidence: "சாலை உள்வாங்குதல்",
+      location: "ஆயத்தொலைவுகள் / இருப்பிடம்",
+      useGPS: "GPS பயன்படுத்தவும்",
+      photo: "புகைப்பட அத்தாட்சி",
+      offlineNote: "ஆஃப்லைனில் பதிவு செய்யப்பட்ட அறிக்கைகள் இணையம் வந்தவுடன் தானாகவே பதிவேறும்.",
+      submitBtn: "அறிக்கையை சமர்ப்பி"
+    },
+    response: {
+      title: "அவசரகால மீட்பு நடவடிக்கை & NDRF அனுப்புதல்",
+      priorityScore: "முன்னுரிமை மதிப்பீடு",
+      deployUnit: "NDRF/SDRF குழுவை அனுப்பு",
+      unitsDeployed: "செயலில் உள்ள குழுக்கள்",
+      shelterCapacity: "கிடைக்கக்கூடிய இடம்"
+    }
+  },
   hi: {
     appTitle: "एआईएमएस - भूस्खलन पूर्व चेतावनी",
     subTitle: "पूर्वोत्तर क्षेत्र (NER) आपदा प्रबंधन मंच",

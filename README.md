@@ -49,8 +49,9 @@ AIMS provides targeted regional coverage across two of India's most landslide-vu
 - **"Simulate in AI Engine" Action**: Directly populates historical parameters into the What-If Simulator for comparative risk analysis.
 
 ### 🌐 6. Multi-Lingual Internationalization (i18n)
-- Seamless live switching across **6 native languages**:
+- Seamless live switching across **7 native languages**:
   - 🇬🇧 **English**
+  - 🇮🇳 **தமிழ் (Tamil)**
   - 🇮🇳 **हिन्दी (Hindi)**
   - 🇮🇳 **অসমীয়া (Assamese)**
   - 🇮🇳 **বাংলা (Bengali)**

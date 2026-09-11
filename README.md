@@ -212,6 +212,38 @@ const fs = resistingShear / drivingShear;
 
 ---
 
+## 🧠 AI & Machine Learning Architecture & Hosting Specification
+
+AIMS employs a hybrid **Edge-and-Cloud AI Architecture** designed to operate without cloud latency or single-point network dependencies during severe mountain cloudbursts and infrastructure outages.
+
+### 📍 1. Edge-Hosted Physics-Informed Machine Learning (PIML) Engine
+- **Hosting Location**: `src/utils/aiPredictorEngine.js` (Executes locally on client/edge browser instances & command center terminals).
+- **Model Architecture**: Fuses deterministic Mohr-Coulomb slope stability physics with non-linear Machine Learning Landslide Susceptibility Index (LSI) proxy weighting.
+- **Key Outputs**:
+  - **Factor of Safety ($F_s$)**: Live dynamic computation under simulated and real-time environmental stress.
+  - **Debris Motion Dynamics**: Predicts debris flow velocity ($m/s$) and runout travel distance ($meters$).
+  - **Impact Clock Forecast**: Computes exact clock-time estimated arrival ($ETA$) at downhill settlements and highway corridors.
+  - **Automated AI Mitigative Actions**: Generates prioritized safety protocols based on risk tier thresholds.
+
+### 🛰️ 2. Synthetic Aperture Radar (SAR) & Satellite Weather AI Detector
+- **Hosting Location**: `src/utils/satelliteWeatherAi.js` (Ingests Sentinel-1 SAR & INSAT-3DR satellite telemetry).
+- **Model Architecture**: Convolutional Anomaly & Interferometric SAR Coherence Loss Detector.
+- **Key Capabilities**:
+  - **Millimeter Ground Displacement**: Analyzes Sentinel-1 SAR phase shift for pre-failure slope creep.
+  - **Cloud Top Temperature Anomaly**: Detects convective micro-burst cloudburst cells via INSAT-3DR thermal infrared imagery.
+
+### 🌤️ 3. Natural Language & Bulletin NLP Parser (IMD Mausam Engine)
+- **Hosting Location**: `src/utils/imdMausamBackend.js` (Live weather service worker layer).
+- **Model Architecture**: Pattern extraction and NLP text classifier for India Meteorological Department (IMD) disaster bulletins.
+- **Key Capabilities**: Automatically parses unstructured meteorological alert texts and maps district warnings to spatial map layers.
+
+### ⚡ 4. NITI Aayog ICED 3.0 Climate Vulnerability Fusion Model
+- **Hosting Location**: `src/utils/nitiAayogIcedBackend.js` (State climate & energy grid risk engine).
+- **Model Architecture**: Multi-criteria climate vulnerability matrix fusion.
+- **Key Capabilities**: Merges NITI Aayog's state Climate Vulnerability Index (CVI) with real-time geotechnical telemetry to evaluate power grid and infrastructure exposure.
+
+---
+
 ## 📜 Compliance & Disaster Management Standards
 
 AIMS is designed in alignment with national disaster protocols:

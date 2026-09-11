@@ -22,7 +22,8 @@ import {
   FileText,
   MapPin,
   Compass,
-  Download
+  Download,
+  CheckCircle2
 } from "lucide-react";
 
 export const DashboardLayout = () => {
@@ -86,12 +87,62 @@ export const DashboardLayout = () => {
     reportsPage * reportsPerPage
   );
 
+  const [exportToastNotification, setExportToastNotification] = useState(false);
+
   const toggleStateFilter = (stateName) => {
     setSelectedStates((prev) => ({ ...prev, [stateName]: !prev[stateName] }));
   };
 
+  const handleExportRegionData = () => {
+    const activeStatesList = Object.keys(selectedStates).filter((st) => selectedStates[st]);
+
+    const csvRows = [
+      ["Station ID", "Station / Location Name", "State", "District", "24h Rainfall (mm)", "Soil Saturation VWC (%)", "Safety Factor (Fs)", "Risk Tier", "Latitude", "Longitude"]
+    ];
+
+    sensors.forEach((s) => {
+      if (activeStatesList.includes(s.state) || activeStatesList.length === 0) {
+        csvRows.push([
+          s.id,
+          `"${s.name}"`,
+          s.state,
+          s.district || "N/A",
+          s.rainfall24h,
+          `${s.soilMoistureVWC}%`,
+          s.fs,
+          s.riskLevel,
+          s.lat,
+          s.lng
+        ]);
+      }
+    });
+
+    const csvContent = "data:text/csv;charset=utf-8," + csvRows.map((row) => row.join(",")).join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const downloadLink = document.createElement("a");
+    downloadLink.setAttribute("href", encodedUri);
+    downloadLink.setAttribute("download", `AIMS_NER_Region_Map_Data_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+
+    setExportToastNotification(true);
+    setTimeout(() => setExportToastNotification(false), 4000);
+  };
+
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 relative">
+      {/* Export Toast Notification */}
+      {exportToastNotification && (
+        <div className="fixed top-16 right-6 z-[9999] bg-emerald-950 border border-emerald-600 text-white px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 animate-bounce">
+          <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+          <div>
+            <h4 className="font-bold text-xs text-emerald-300">NER Regional Map Exported!</h4>
+            <p className="text-[11px] text-slate-300">Downloaded <code className="font-mono text-emerald-200">AIMS_NER_Region_Map_Data.csv</code></p>
+          </div>
+        </div>
+      )}
+
       {/* 4-Tier Risk Counter Cards Bar */}
       <RiskTierCounterBar />
 
@@ -257,7 +308,11 @@ export const DashboardLayout = () => {
               <h3 className="font-bold text-white text-xs uppercase tracking-wider">
                 {t("gis.mapsByProvince")} (NER Checklist)
               </h3>
-              <button className="flex items-center gap-1 text-[11px] bg-slate-800 hover:bg-slate-700 text-amber-300 font-bold px-2.5 py-1 rounded-lg transition">
+              <button
+                onClick={handleExportRegionData}
+                className="flex items-center gap-1.5 text-[11px] bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-1.5 rounded-xl shadow-lg transition active:scale-95 cursor-pointer"
+                title="Export Regional Map & Sensor Data CSV"
+              >
                 <Download className="w-3.5 h-3.5" />
                 <span>{t("gis.exportMap")}</span>
               </button>

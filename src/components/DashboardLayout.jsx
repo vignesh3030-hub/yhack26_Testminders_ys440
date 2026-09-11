@@ -66,11 +66,22 @@ export const DashboardLayout = () => {
     telemetryPage * telemetryPerPage
   );
 
-  // Table 2: Latest Hazard Reports Pagination State
+  // Table 2: Latest Hazard Reports Filter & Pagination State
+  const [reportRegionFilter, setReportRegionFilter] = useState("NER"); // Default to North East Region
   const [reportsPage, setReportsPage] = useState(1);
   const reportsPerPage = 3;
-  const totalReportsPages = Math.ceil(sensors.length / reportsPerPage) || 1;
-  const currentReportsItems = sensors.slice(
+
+  const nerStates = ["Sikkim", "Meghalaya", "Assam", "Mizoram", "Nagaland", "Manipur", "Arunachal Pradesh"];
+
+  const filteredReportSensors = sensors.filter((s) => {
+    if (reportRegionFilter === "NER") {
+      return nerStates.includes(s.state) || s.state !== "Tamil Nadu";
+    }
+    return true;
+  });
+
+  const totalReportsPages = Math.ceil(filteredReportSensors.length / reportsPerPage) || 1;
+  const currentReportsItems = filteredReportSensors.slice(
     (reportsPage - 1) * reportsPerPage,
     reportsPage * reportsPerPage
   );
@@ -304,11 +315,45 @@ export const DashboardLayout = () => {
         <div className="lg:col-span-5 space-y-5">
           {/* 1. Latest Hazard Reports Table ("Laporan Terbaru") */}
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-2xl space-y-3">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-2.5">
-              <h3 className="font-bold text-white text-xs uppercase tracking-wider">
-                {t("tables.recentReports")}
-              </h3>
-              <span className="text-[10px] text-slate-400 font-mono">SORT BY: Latest</span>
+            <div className="flex flex-wrap items-center justify-between border-b border-slate-800 pb-2.5 gap-2">
+              <div>
+                <h3 className="font-bold text-white text-xs uppercase tracking-wider flex items-center gap-1.5">
+                  <span>{t("tables.recentReports")}</span>
+                </h3>
+                <span className="text-[10px] text-amber-400 font-mono font-bold block">
+                  {reportRegionFilter === "NER" ? "⚡ Filtered: North East Region (NER) Only" : "🌐 All Regions View"}
+                </span>
+              </div>
+
+              {/* Region Filter Buttons */}
+              <div className="flex items-center gap-1 text-[10px] font-bold">
+                <button
+                  onClick={() => {
+                    setReportRegionFilter("NER");
+                    setReportsPage(1);
+                  }}
+                  className={`px-2.5 py-1 rounded-lg transition cursor-pointer ${
+                    reportRegionFilter === "NER"
+                      ? "bg-amber-500 text-slate-950 shadow-md font-black"
+                      : "bg-slate-950 border border-slate-800 text-slate-400 hover:text-white"
+                  }`}
+                >
+                  NER Sector Only
+                </button>
+                <button
+                  onClick={() => {
+                    setReportRegionFilter("ALL");
+                    setReportsPage(1);
+                  }}
+                  className={`px-2.5 py-1 rounded-lg transition cursor-pointer ${
+                    reportRegionFilter === "ALL"
+                      ? "bg-amber-500 text-slate-950 shadow-md font-black"
+                      : "bg-slate-950 border border-slate-800 text-slate-400 hover:text-white"
+                  }`}
+                >
+                  All Regions
+                </button>
+              </div>
             </div>
 
             <div className="space-y-2.5">

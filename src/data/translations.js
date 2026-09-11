@@ -11,7 +11,8 @@ export const translations = {
       fieldReports: "Field Reports",
       emergencyResponse: "Emergency Dispatch",
       shelterTracker: "Relief Shelters",
-      situationReport: "Export SitRep"
+      situationReport: "Export SitRep",
+      historicalCases: "Historical Case Studies"
     },
     header: {
       yourLocation: "Your Location",
@@ -37,6 +38,41 @@ export const translations = {
       soilMoisture: "Soil Saturation (VWC)",
       rainfall24h: "24h Rainfall",
       slopeAngle: "Slope Gradient"
+    },
+    gisControls: {
+      layersTitle: "GIS Map Layers",
+      heatmap: "Risk Heatmap",
+      sensors: "IoT Sensors",
+      highways: "Vulnerable Highways",
+      villages: "Mountain Villages",
+      shelters: "Relief Shelters",
+      fieldReports: "Field Reports",
+      allIndia: "All India View",
+      tnSector: "Tamil Nadu Sector",
+      nerSector: "North Eastern Sector"
+    },
+    mapPopups: {
+      location: "Location",
+      rain24h: "24h Rainfall",
+      soilSat: "Soil Saturation (VWC)",
+      slopeAngle: "Slope Angle",
+      fsFactor: "Factor of Safety (Fs)",
+      porePressure: "Pore Water Pressure",
+      displacement: "Inclinometer Displacement",
+      connectedHighway: "Connected Highway",
+      population: "At Risk Population",
+      evacuationStatus: "Evacuation Status",
+      designatedShelter: "Designated Shelter",
+      primaryThreat: "Primary Hazard Threat",
+      dispatchRescue: "Dispatch Rescue Unit",
+      highwayLength: "Highway Length",
+      criticalCorridor: "Critical Failure Corridor",
+      trafficStatus: "Traffic Status",
+      travelAdvisory: "Travel Advisory",
+      reportedBy: "Reported By",
+      hazardCategory: "Hazard Category",
+      viewTelemetry: "View Station Telemetry",
+      close: "Close"
     },
     tables: {
       recentReports: "Latest Slope & Landslide Reports",

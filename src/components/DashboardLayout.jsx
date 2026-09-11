@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import { useDisasterData } from "../context/DisasterDataContext";
 import { RiskTierCounterBar } from "./RiskTierCounterBar";
+import { AISatelliteMonitorCard } from "./AIModel/AISatelliteMonitorCard";
+import { IMDMausamCard } from "./Common/IMDMausamCard";
+import { NITIAayogICEDCard } from "./AIModel/NITIAayogICEDCard";
 import { RiskMap } from "./GISMap/RiskMap";
 import { DetailReportModal } from "./DetailReportModal";
 
@@ -39,6 +42,39 @@ export const DashboardLayout = () => {
     Arunachal: true
   });
 
+  // Table 1: Detail Region Telemetry Pagination & Search State
+  const [telemetryPage, setTelemetryPage] = useState(1);
+  const [telemetrySearch, setTelemetrySearch] = useState("");
+  const [telemetrySort, setTelemetrySort] = useState("ward");
+
+  const filteredSensors = sensors
+    .filter(
+      (s) =>
+        s.nearestVillage.toLowerCase().includes(telemetrySearch.toLowerCase()) ||
+        s.name.toLowerCase().includes(telemetrySearch.toLowerCase()) ||
+        s.state.toLowerCase().includes(telemetrySearch.toLowerCase())
+    )
+    .sort((a, b) => {
+      if (telemetrySort === "precip") return b.rainfall24h - a.rainfall24h;
+      return a.nearestVillage.localeCompare(b.nearestVillage);
+    });
+
+  const telemetryPerPage = 4;
+  const totalTelemetryPages = Math.ceil(filteredSensors.length / telemetryPerPage) || 1;
+  const currentTelemetryItems = filteredSensors.slice(
+    (telemetryPage - 1) * telemetryPerPage,
+    telemetryPage * telemetryPerPage
+  );
+
+  // Table 2: Latest Hazard Reports Pagination State
+  const [reportsPage, setReportsPage] = useState(1);
+  const reportsPerPage = 3;
+  const totalReportsPages = Math.ceil(sensors.length / reportsPerPage) || 1;
+  const currentReportsItems = sensors.slice(
+    (reportsPage - 1) * reportsPerPage,
+    reportsPage * reportsPerPage
+  );
+
   const toggleStateFilter = (stateName) => {
     setSelectedStates((prev) => ({ ...prev, [stateName]: !prev[stateName] }));
   };
@@ -47,6 +83,15 @@ export const DashboardLayout = () => {
     <div className="space-y-5">
       {/* 4-Tier Risk Counter Cards Bar */}
       <RiskTierCounterBar />
+
+      {/* AI Satellite Weather & Risk Monitoring Engine Card */}
+      <AISatelliteMonitorCard />
+
+      {/* Official India Meteorological Department (IMD) Mausam Weather & Warning Gateway */}
+      <IMDMausamCard />
+
+      {/* Official NITI Aayog ICED Climate & Disaster Vulnerability Intelligence */}
+      <NITIAayogICEDCard />
 
       {/* Main Grid Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
@@ -89,6 +134,11 @@ export const DashboardLayout = () => {
                   <input
                     type="text"
                     placeholder="Search region..."
+                    value={telemetrySearch}
+                    onChange={(e) => {
+                      setTelemetrySearch(e.target.value);
+                      setTelemetryPage(1);
+                    }}
                     className="bg-slate-950 border border-slate-800 rounded-lg pl-8 pr-2 py-1 text-xs text-slate-200 focus:outline-none focus:border-amber-500 w-36"
                   />
                 </div>
@@ -96,9 +146,16 @@ export const DashboardLayout = () => {
                 {/* Filter Dropdown */}
                 <div className="flex items-center gap-1 bg-slate-950 border border-slate-800 px-2 py-1 rounded-lg text-xs">
                   <Filter className="w-3 h-3 text-amber-400" />
-                  <select className="bg-transparent text-slate-300 text-xs focus:outline-none cursor-pointer">
-                    <option className="bg-slate-900">Sort By Ward</option>
-                    <option className="bg-slate-900">Sort By Precip</option>
+                  <select
+                    value={telemetrySort}
+                    onChange={(e) => {
+                      setTelemetrySort(e.target.value);
+                      setTelemetryPage(1);
+                    }}
+                    className="bg-transparent text-slate-300 text-xs focus:outline-none cursor-pointer"
+                  >
+                    <option value="ward" className="bg-slate-900">Sort By Ward</option>
+                    <option value="precip" className="bg-slate-900">Sort By Precip</option>
                   </select>
                 </div>
               </div>
@@ -118,33 +175,65 @@ export const DashboardLayout = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-800/80">
-                  {sensors.slice(0, 5).map((s) => (
-                    <tr key={s.id} className="hover:bg-slate-950/60 transition">
-                      <td className="py-2.5 px-2 font-bold text-white">{s.nearestVillage}</td>
-                      <td className="py-2.5 px-2 font-mono text-cyan-300">{s.rainfall24h} mm</td>
-                      <td className="py-2.5 px-2 font-mono text-blue-300">{s.soilMoistureVWC}%</td>
-                      <td className="py-2.5 px-2 font-mono text-amber-300">{s.inclinometerDisplacement} mm/d</td>
-                      <td className="py-2.5 px-2 font-mono text-slate-400">{s.id.slice(-2)}</td>
-                      <td className="py-2.5 px-2 flex items-center gap-1.5">
-                        <CloudRain className="w-3.5 h-3.5 text-cyan-400" />
-                        <span className="text-slate-300">Heavy Rain</span>
+                  {currentTelemetryItems.length > 0 ? (
+                    currentTelemetryItems.map((s) => (
+                      <tr key={s.id} className="hover:bg-slate-950/60 transition">
+                        <td className="py-2.5 px-2 font-bold text-white">{s.nearestVillage}</td>
+                        <td className="py-2.5 px-2 font-mono text-cyan-300">{s.rainfall24h} mm</td>
+                        <td className="py-2.5 px-2 font-mono text-blue-300">{s.soilMoistureVWC}%</td>
+                        <td className="py-2.5 px-2 font-mono text-amber-300">{s.inclinometerDisplacement} mm/d</td>
+                        <td className="py-2.5 px-2 font-mono text-slate-400">{s.id.slice(-2)}</td>
+                        <td className="py-2.5 px-2 flex items-center gap-1.5">
+                          <CloudRain className="w-3.5 h-3.5 text-cyan-400" />
+                          <span className="text-slate-300">Heavy Rain</span>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="6" className="py-4 text-center text-slate-500 text-xs">
+                        No matching region telemetry entries found.
                       </td>
                     </tr>
-                  ))}
+                  )}
                 </tbody>
               </table>
             </div>
 
-            {/* Pagination */}
-            <div className="flex justify-between items-center text-xs pt-1">
-              <span className="text-slate-400 text-[11px]">Showing 1 to 5 of 7 entries</span>
+            {/* Pagination Controls */}
+            <div className="flex flex-col sm:flex-row justify-between items-center text-xs pt-1 gap-2 border-t border-slate-800/60">
+              <span className="text-slate-400 text-[11px]">
+                Showing {filteredSensors.length > 0 ? (telemetryPage - 1) * telemetryPerPage + 1 : 0} to{" "}
+                {Math.min(telemetryPage * telemetryPerPage, filteredSensors.length)} of {filteredSensors.length} entries
+              </span>
               <div className="flex items-center gap-1 font-mono">
-                <button className="px-2.5 py-1 bg-slate-950 border border-slate-800 rounded text-slate-400 hover:text-white">
+                <button
+                  onClick={() => setTelemetryPage((p) => Math.max(1, p - 1))}
+                  disabled={telemetryPage === 1}
+                  className="px-2.5 py-1 bg-slate-950 border border-slate-800 rounded text-slate-300 hover:text-white hover:border-amber-500/50 disabled:opacity-40 disabled:cursor-not-allowed transition cursor-pointer"
+                >
                   Previous
                 </button>
-                <button className="px-2.5 py-1 bg-amber-500 text-slate-950 font-bold rounded">1</button>
-                <button className="px-2.5 py-1 bg-slate-950 border border-slate-800 rounded text-slate-400 hover:text-white">2</button>
-                <button className="px-2.5 py-1 bg-slate-950 border border-slate-800 rounded text-slate-400 hover:text-white">
+
+                {Array.from({ length: totalTelemetryPages }).map((_, idx) => (
+                  <button
+                    key={idx + 1}
+                    onClick={() => setTelemetryPage(idx + 1)}
+                    className={`px-2.5 py-1 font-bold rounded transition cursor-pointer ${
+                      telemetryPage === idx + 1
+                        ? "bg-amber-500 text-slate-950"
+                        : "bg-slate-950 border border-slate-800 text-slate-300 hover:text-white"
+                    }`}
+                  >
+                    {idx + 1}
+                  </button>
+                ))}
+
+                <button
+                  onClick={() => setTelemetryPage((p) => Math.min(totalTelemetryPages, p + 1))}
+                  disabled={telemetryPage === totalTelemetryPages}
+                  className="px-2.5 py-1 bg-slate-950 border border-slate-800 rounded text-slate-300 hover:text-white hover:border-amber-500/50 disabled:opacity-40 disabled:cursor-not-allowed transition cursor-pointer"
+                >
                   Next
                 </button>
               </div>
@@ -167,9 +256,13 @@ export const DashboardLayout = () => {
               {/* Mini Map Thumbnail */}
               <div className="sm:col-span-6 h-36 rounded-xl overflow-hidden border border-slate-800 relative">
                 <img
-                  src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=600&q=80"
+                  src="/region_map.png"
                   alt="Region map"
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "/region_map.png";
+                  }}
                 />
                 <div className="absolute inset-0 bg-slate-950/40 flex items-center justify-center">
                   <span className="bg-slate-900/90 text-white font-bold text-xs px-3 py-1 rounded-full border border-slate-700">
@@ -219,7 +312,7 @@ export const DashboardLayout = () => {
             </div>
 
             <div className="space-y-2.5">
-              {sensors.map((sensor) => {
+              {currentReportsItems.map((sensor) => {
                 const isCrit = sensor.riskLevel === "CRITICAL";
 
                 return (
@@ -258,11 +351,25 @@ export const DashboardLayout = () => {
               })}
             </div>
 
-            {/* Pagination */}
+            {/* Functional Reports Pagination */}
             <div className="flex justify-between items-center text-xs pt-1 border-t border-slate-800">
-              <button className="px-2 py-1 bg-slate-950 border border-slate-800 rounded text-slate-400">Previous</button>
-              <span className="text-slate-400 text-[11px]">Page 1 of 3</span>
-              <button className="px-2 py-1 bg-slate-950 border border-slate-800 rounded text-slate-400">Next</button>
+              <button
+                onClick={() => setReportsPage((p) => Math.max(1, p - 1))}
+                disabled={reportsPage === 1}
+                className="px-3 py-1 bg-slate-950 border border-slate-800 rounded text-slate-300 hover:text-white hover:border-amber-500/50 disabled:opacity-40 disabled:cursor-not-allowed transition cursor-pointer"
+              >
+                Previous
+              </button>
+              <span className="text-slate-400 font-mono text-[11px]">
+                Page <strong className="text-amber-400">{reportsPage}</strong> of {totalReportsPages}
+              </span>
+              <button
+                onClick={() => setReportsPage((p) => Math.min(totalReportsPages, p + 1))}
+                disabled={reportsPage === totalReportsPages}
+                className="px-3 py-1 bg-slate-950 border border-slate-800 rounded text-slate-300 hover:text-white hover:border-amber-500/50 disabled:opacity-40 disabled:cursor-not-allowed transition cursor-pointer"
+              >
+                Next
+              </button>
             </div>
           </div>
 

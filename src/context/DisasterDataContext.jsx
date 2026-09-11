@@ -8,6 +8,7 @@ import {
 } from "../data/nerLandslideData";
 import { calculateLandslideRisk } from "../utils/aiPredictorEngine";
 import { getOfflineReports, saveReportOffline, markReportsSynced, clearOfflineReports } from "../utils/offlineStorage";
+import { analyzeSatelliteWeatherRisk, fetchLiveSatelliteAiFeed } from "../utils/satelliteWeatherAi";
 
 const DisasterDataContext = createContext();
 
@@ -21,7 +22,7 @@ const initialFieldReports = [
     lng: 88.6065,
     severity: "CRITICAL",
     description: "New 12cm continuous tension crack detected along upper slope shoulder after 140mm rainfall.",
-    photoUrl: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=600&q=80",
+    photoUrl: "/tension_crack.png",
     status: "VERIFIED",
     timestamp: "25 mins ago",
     synced: true
@@ -35,7 +36,7 @@ const initialFieldReports = [
     lng: 91.8933,
     severity: "HIGH",
     description: "Intermittent boulders falling across left lane. Mud seepage visible.",
-    photoUrl: "https://images.unsplash.com/photo-1508873696983-2df515122519?auto=format&fit=crop&w=600&q=80",
+    photoUrl: "/rockfall.png",
     status: "VERIFIED",
     timestamp: "1 hour ago",
     synced: true
@@ -53,6 +54,27 @@ export const DisasterDataProvider = ({ children }) => {
   const [unitsDeployed, setUnitsDeployed] = useState(14);
   const [showSitRepModal, setShowSitRepModal] = useState(false);
 
+  // Satellite AI Weather State
+  const [selectedSatelliteZone, setSelectedSatelliteZone] = useState("East Sikkim / Gangtok Axis");
+  const [satelliteAiData, setSatelliteAiData] = useState(() =>
+    analyzeSatelliteWeatherRisk("East Sikkim / Gangtok Axis")
+  );
+  const [isSatelliteLoading, setIsSatelliteLoading] = useState(false);
+
+  // Refresh AI Satellite Data
+  const refreshSatelliteAi = async (zoneName = selectedSatelliteZone) => {
+    setIsSatelliteLoading(true);
+    try {
+      const liveData = await fetchLiveSatelliteAiFeed(zoneName);
+      setSatelliteAiData(liveData);
+      setSelectedSatelliteZone(zoneName);
+    } catch (err) {
+      console.warn("Error refreshing satellite AI feed:", err);
+    } finally {
+      setIsSatelliteLoading(false);
+    }
+  };
+
   // What-If Simulator State
   const [simulatorParams, setSimulatorParams] = useState({
     rainfall24h: 145,
@@ -62,9 +84,39 @@ export const DisasterDataProvider = ({ children }) => {
     deforestationPct: 35
   });
 
+  const [isAutoSimulating, setIsAutoSimulating] = useState(true);
+
   const [simulatorResult, setSimulatorResult] = useState(() =>
     calculateLandslideRisk(simulatorParams)
   );
+
+  // Automatic AI Risk Simulation Mode - Auto-runs analysis sweeps from live satellite & IoT feeds
+  useEffect(() => {
+    if (!isAutoSimulating) return;
+
+    const interval = setInterval(() => {
+      const satRain = satelliteAiData?.telemetry?.satelliteRainRateMmh || 45;
+      const maxSensorRain = Math.max(...sensors.map((s) => s.rainfall24h));
+      const satMoisture = satelliteAiData?.telemetry?.moistureFluxIndex || 88;
+
+      const rainDelta = (Math.random() * 6 - 3);
+      const moistureDelta = (Math.random() * 2 - 1);
+      const cutDelta = (Math.random() * 1.5 - 0.75);
+
+      const targetRain = Math.min(250, Math.max(10, Math.round(maxSensorRain + satRain * 0.4 + rainDelta)));
+      const targetMoisture = Math.min(100, Math.max(20, Math.round(satMoisture + moistureDelta)));
+      const targetCut = Math.min(25, Math.max(0, Math.round(12 + cutDelta)));
+
+      setSimulatorParams((prev) => ({
+        ...prev,
+        rainfall24h: targetRain,
+        soilMoistureVWC: targetMoisture,
+        slopeCutAngle: targetCut
+      }));
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [isAutoSimulating, satelliteAiData, sensors]);
 
   // Listen to network status changes & load offline queue
   useEffect(() => {
@@ -153,10 +205,17 @@ export const DisasterDataProvider = ({ children }) => {
         simulatorParams,
         simulatorResult,
         updateSimulator,
+        isAutoSimulating,
+        setIsAutoSimulating,
         unitsDeployed,
         dispatchNDRFUnit,
         showSitRepModal,
-        setShowSitRepModal
+        setShowSitRepModal,
+        selectedSatelliteZone,
+        setSelectedSatelliteZone,
+        satelliteAiData,
+        isSatelliteLoading,
+        refreshSatelliteAi
       }}
     >
       {children}

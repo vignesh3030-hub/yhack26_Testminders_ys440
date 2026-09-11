@@ -76,11 +76,15 @@ export const ReportFeed = () => {
             </div>
 
             {report.photoUrl && (
-              <div className="rounded-lg overflow-hidden h-36 border border-slate-800">
+              <div className="rounded-lg overflow-hidden h-36 border border-slate-800 bg-slate-900">
                 <img
                   src={report.photoUrl}
-                  alt="Evidence"
+                  alt="Hazard Evidence"
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "/tension_crack.png";
+                  }}
                 />
               </div>
             )}

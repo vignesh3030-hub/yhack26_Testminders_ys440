@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useLanguage } from "../../context/LanguageContext";
-import { useDisasterData } from "../../context/DisasterDataContext";
 import { alertSound } from "../../utils/alertSound";
 import {
   X,
@@ -9,8 +8,7 @@ import {
   CheckCircle2,
   Phone,
   MessageSquare,
-  Volume2,
-  AlertTriangle
+  Volume2
 } from "lucide-react";
 
 export const BroadcastModal = ({ onClose }) => {
@@ -20,6 +18,8 @@ export const BroadcastModal = ({ onClose }) => {
   const [channelWhatsApp, setChannelWhatsApp] = useState(true);
   const [channelSiren, setChannelSiren] = useState(true);
   const [channelRadio, setChannelRadio] = useState(false);
+
+  const [smsMobileNumber, setSmsMobileNumber] = useState("8667653030");
 
   const [selectedTarget, setSelectedTarget] = useState("Gangtok & Martam Axis (NH-10)");
   const [customMsg, setCustomMsg] = useState(
@@ -76,7 +76,7 @@ export const BroadcastModal = ({ onClose }) => {
                 Broadcast Sent & Siren Sound Triggered!
               </h4>
               <p className="text-slate-300">
-                Warning transmitted via SMS, WhatsApp & Siren Towers to {selectedTarget}.
+                Warning transmitted via SMS to <strong className="text-white font-mono bg-emerald-900/60 px-2 py-0.5 rounded border border-emerald-700">+91 {smsMobileNumber || "8667653030"}</strong>, WhatsApp & Siren Towers to {selectedTarget}.
               </p>
             </div>
           ) : (
@@ -149,6 +149,26 @@ export const BroadcastModal = ({ onClose }) => {
                   </button>
                 </div>
               </div>
+
+              {/* Target Mobile Number for SMS */}
+              {channelSMS && (
+                <div className="space-y-1.5 bg-slate-950 p-3 rounded-xl border border-red-900/60">
+                  <label className="font-bold text-red-300 flex items-center justify-between text-xs">
+                    <span>Emergency SMS Target Mobile Number:</span>
+                    <span className="text-[10px] text-emerald-400 font-mono font-bold">READY TO TRANSMIT</span>
+                  </label>
+                  <div className="flex items-center gap-2">
+                    <span className="text-slate-400 font-mono font-bold bg-slate-900 px-3 py-2 rounded-lg border border-slate-800 text-xs">+91</span>
+                    <input
+                      type="text"
+                      value={smsMobileNumber}
+                      onChange={(e) => setSmsMobileNumber(e.target.value)}
+                      placeholder="Enter mobile number"
+                      className="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 font-mono text-white text-xs focus:outline-none focus:border-red-500 font-bold tracking-wider"
+                    />
+                  </div>
+                </div>
+              )}
 
               {/* Custom Warning Message Textarea */}
               <div className="space-y-1.5">

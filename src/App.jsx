@@ -13,6 +13,7 @@ import { ReportFeed } from "./components/FieldReports/ReportFeed";
 import { EmergencyResponse } from "./components/Response/EmergencyResponse";
 import { ShelterTracker } from "./components/Response/ShelterTracker";
 import { SituationReportModal } from "./components/Common/SituationReportModal";
+import { HistoricalCasesView } from "./components/Dashboard/HistoricalCasesView";
 
 function MainContent() {
   const { showSitRepModal, setShowSitRepModal } = useDisasterData();
@@ -36,6 +37,10 @@ function MainContent() {
 
           {activeTab === "gisMap" && (
             <FullMapsView />
+          )}
+
+          {activeTab === "historicalCases" && (
+            <HistoricalCasesView onSelectSimulate={() => setActiveTab("aiPredictor")} />
           )}
 
           {activeTab === "aiPredictor" && (

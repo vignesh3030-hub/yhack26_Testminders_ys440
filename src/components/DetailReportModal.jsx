@@ -36,9 +36,13 @@ export const DetailReportModal = ({ item, onClose }) => {
           {/* Mini Map Header Banner */}
           <div className="h-32 w-full rounded-xl overflow-hidden border border-slate-800 bg-slate-950 relative">
             <img
-              src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1200&q=80"
+              src="/region_map.png"
               alt="Satellite Terrain Map"
               className="w-full h-full object-cover opacity-60"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "/region_map.png";
+              }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent flex items-end p-3">
               <div className="flex items-center gap-2">
@@ -77,11 +81,15 @@ export const DetailReportModal = ({ item, onClose }) => {
 
           {/* Photo & Telemetry Summary Box */}
           <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 bg-slate-950/80 p-3.5 rounded-xl border border-slate-800">
-            <div className="sm:col-span-5 h-36 rounded-lg overflow-hidden border border-slate-800">
+            <div className="sm:col-span-5 h-36 rounded-lg overflow-hidden border border-slate-800 bg-slate-900">
               <img
-                src={item.photoUrl || "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=600&q=80"}
+                src={item.photoUrl || "/tension_crack.png"}
                 alt="Slope Evidence"
                 className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "/tension_crack.png";
+                }}
               />
             </div>
 

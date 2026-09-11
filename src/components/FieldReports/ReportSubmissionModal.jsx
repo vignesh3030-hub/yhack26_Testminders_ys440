@@ -51,7 +51,7 @@ export const ReportSubmissionModal = ({ onClose }) => {
       lng: parseFloat(lng),
       severity,
       description,
-      photoUrl: photoUrl || "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=600&q=80"
+      photoUrl: photoUrl || "/tension_crack.png"
     };
 
     addReport(reportData);

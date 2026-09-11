@@ -244,6 +244,22 @@ AIMS employs a hybrid **Edge-and-Cloud AI Architecture** designed to operate wit
 
 ---
 
+## 🧮 Comprehensive List of Algorithms Used in AIMS
+
+| Algorithm Name | Category / Type | Purpose & Mathematical Logic | Source Code Module |
+|---|---|---|---|
+| **1. Mohr-Coulomb Infinite Slope Limit Equilibrium Algorithm** | Geotechnical Physics Model | Computes slope **Factor of Safety ($F_s$)** using pore water pressure ($u$), effective cohesion ($c'$), and friction angle ($\phi'$):<br>$$F_s = \frac{c' + (\sigma - u) \tan \phi'}{\tau_d}$$ | `src/utils/aiPredictorEngine.js` |
+| **2. Physics-Informed Machine Learning (PIML) Risk Proxy Algorithm** | Hybrid AI Model | Calculates composite **Landslide Susceptibility Index (LSI)** score (0–100%) by combining weighted factors ($w_{rain}, w_{soil}, w_{slope}, w_{deforest}$) with non-linear acceleration when $F_s < 1.25$. | `src/utils/aiPredictorEngine.js` |
+| **3. Debris Flow Kinematics & Velocity Prediction Algorithm** | Geotechnical Dynamics | Estimates debris velocity ($m/s$) and runout distance ($meters$) based on gravitational acceleration ($g$), slope gradient ($\theta$), and vegetation loss ($\%$). | `src/utils/aiPredictorEngine.js` |
+| **4. Landslide Impact Clock & Clock-Time ETA Algorithm** | Temporal Predictive Engine | Computes exact clock-time arrival ($ETA$) at downhill settlements and highway corridors based on live rainfall rate and safety factor degradation ($T_{impact\_minutes} = 35 \cdot F_s - \frac{Precip_{24h}}{250} \cdot 10$). | `src/utils/aiPredictorEngine.js` |
+| **5. Synthetic Aperture Radar (SAR) Phase Shift & Anomaly Algorithm** | Remote Sensing AI | Analyzes Sentinel-1 SAR C-band interferometric coherence loss for millimeter-level pre-failure slope displacement and INSAT-3DR cloud top brightness temperature anomalies. | `src/utils/satelliteWeatherAi.js` |
+| **6. IMD Bulletin NLP & Regex Text Classifier Algorithm** | Natural Language Processing | Extracts district hazard levels (Red/Orange/Yellow alerts) and rainfall intensity figures from unstructured weather bulletin text. | `src/utils/imdMausamBackend.js` |
+| **7. NITI Aayog Climate Vulnerability Index (CVI) Matrix Fusion Algorithm** | Multi-Criteria Matrix Fusion | Blends state-level Climate Vulnerability Index (CVI) scores with real-time physical telemetry to assess power grid and energy asset risk. | `src/utils/nitiAayogIcedBackend.js` |
+| **8. Web Audio API Frequency Synthesizer Algorithm** | Audio Signal Processing | Programmatically generates multi-frequency emergency siren alarm audio ($440\text{ Hz} \leftrightarrow 880\text{ Hz}$ frequency modulation oscillator loop) without external MP3 dependencies. | `src/utils/alertSound.js` |
+| **9. Offline FIFO Queue & Resilient State Sync Algorithm** | Distributed Systems | Queues field hazard reports in `LocalStorage` during network outages in mountain ghats and automatically syncs payload to central server upon network restoration. | `src/utils/offlineStorage.js` |
+
+---
+
 ## 📜 Compliance & Disaster Management Standards
 
 AIMS is designed in alignment with national disaster protocols:
@@ -258,23 +274,4 @@ AIMS is designed in alignment with national disaster protocols:
 ## 📄 License
 
 Distributed under the **MIT License**. See `LICENSE` for details.
- drivingShear = normalStress * Math.sin(slopeRad);
 
-// Safety Factor (Fs < 1.0 indicates slope failure)
-const fs = resistingShear / drivingShear;
-```
-
----
-
-## 📜 Compliance & Disaster Management Standards
-
-AIMS is designed in alignment with national disaster protocols:
-- **National Disaster Management Authority (NDMA)** guidelines for Landslide Risk Management.
-- **Landslide Atlas of India** (ISRO / NRSC) vulnerability mapping standards.
-- **Assam State Disaster Management Authority (ASDMA)** & **Tamil Nadu State Disaster Management Authority (TNSDMA)** reporting formats.
-
----
-
-## 📄 License
-
-Distributed under the **MIT License**. See `LICENSE` for details.
